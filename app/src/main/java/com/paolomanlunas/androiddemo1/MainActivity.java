@@ -89,9 +89,7 @@ public class MainActivity extends AppCompatActivity {
          double futureSavings = calculateRetirement(interestFloat, currentSavingsFloat, monthlySavingsFloat, (retirementAgeInt - currentAgeInt) * 12);
          //--- Result Text:
 
-         mResultText.setText(
-                 MessageFormat.format("At the current rate of {0}%, saving ${1} a month, You will have ${2} by {3}.",
-                         interestFloat, monthlySavingsFloat, futureSavings, retirementAge));
+         mResultText.setText(String.format("At the current rate of %s%%, saving $%s a month, You will have $%s by %s.", interestFloat, monthlySavingsFloat, futureSavings, retirementAge));
       } catch (Exception e) {
          Analytics.trackEvent(e.getMessage());
       }
