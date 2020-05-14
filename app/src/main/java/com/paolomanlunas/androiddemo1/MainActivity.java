@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.MessageFormat;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
@@ -85,13 +86,23 @@ public class MainActivity extends AppCompatActivity {
          }
 
          // Calculate future saving:
+         double futureSavings = calculateRetirement(interestFloat, currentSavingsFloat, monthlySavingsFloat, (retirementAgeInt - currentAgeInt) * 12);
+         //--- Result Text:
 
-
-         //--- Result Text
-         mResultText.setText(String.format("At current rate of %s%%, saving $%s a month.", interestFloat, monthlySavingsFloat));
+         mResultText.setText(
+                 MessageFormat.format("At the current rate of {0}%, saving ${1} a month, You will have ${2} by {3}.",
+                         interestFloat, monthlySavingsFloat, futureSavings, retirementAge));
       } catch (Exception e) {
          Analytics.trackEvent(e.getMessage());
       }
+   }
 
+   private double calculateRetirement(float interestFloat, float currentSavingsFloat, float monthlySavingsFloat, int numMonths) {
+      double savings = Math.pow(currentSavingsFloat * (1 + (interestFloat / 100 / 12)), numMonths);
+      for (int i = 1; i <= numMonths; i++) {
+         savings += Math.pow(monthlySavingsFloat * (1 + (interestFloat / 100 / 12)), i);
+      }
+
+      return savings;
    }
 }
