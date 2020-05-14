@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
          }
 
          // Calculate future saving:
-         double futureSavings = calculateRetirement(interestFloat, currentSavingsFloat, monthlySavingsFloat, (retirementAgeInt - currentAgeInt) * 12);
+         float futureSavings = calculateRetirement(interestFloat, currentSavingsFloat, monthlySavingsFloat, (retirementAgeInt - currentAgeInt) * 12);
          //--- Result Text:
 
          mResultText.setText(String.format("At the current rate of %s%%, saving $%s a month, You will have $%s by %s.", interestFloat, monthlySavingsFloat, futureSavings, retirementAge));
@@ -95,12 +95,11 @@ public class MainActivity extends AppCompatActivity {
       }
    }
 
-   private double calculateRetirement(float interestFloat, float currentSavingsFloat, float monthlySavingsFloat, int numMonths) {
-      double savings = Math.pow(currentSavingsFloat * (1 + (interestFloat / 100 / 12)), numMonths);
-      for (int i = 1; i <= numMonths; i++) {
-         savings += Math.pow(monthlySavingsFloat * (1 + (interestFloat / 100 / 12)), i);
-      }
+   private float calculateRetirement(float interestFloat, float currentSavingsFloat, float monthlySavingsFloat, int numMonths) {
+      //      for (int i = 1; i <= numMonths; i++) {
+//         savings += Math.pow(monthlySavingsFloat * (1 + (interestFloat / 100 / 12)), i);
+//      }
 
-      return savings;
+      return currentSavingsFloat * (1 + (interestFloat / 100 / 12));
    }
 }
