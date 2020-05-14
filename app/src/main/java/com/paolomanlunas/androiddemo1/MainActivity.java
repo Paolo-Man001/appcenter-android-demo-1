@@ -10,18 +10,21 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
-   private static final String LOG_TAG = "LOG_TAGE";
+   private static final String LOG_TAG = "LOG_TAG";
+
    private EditText mInterestRate;
    private EditText mCurrentAge;
    private EditText mRetirementAge;
    private EditText mMonthlySavings;
    private EditText mCurrentSavings;
+   private TextView mResultText;
 
    @Override
    protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
       mRetirementAge = findViewById(R.id.retirementEditText);
       mMonthlySavings = findViewById(R.id.monthlySavingsEditText);
       mCurrentSavings = findViewById(R.id.currentSavingsEditText);
+      mResultText = findViewById(R.id.resultTextView);
 
    }
 
@@ -79,6 +83,12 @@ public class MainActivity extends AppCompatActivity {
          if (retirementAgeInt <= currentAgeInt) {
             Analytics.trackEvent("wrong_age", properties);
          }
+
+         // Calculate future saving:
+
+
+         //--- Result Text
+         mResultText.setText(String.format("At current rate of %s%%, saving $%s a month.", interestFloat, monthlySavingsFloat));
       } catch (Exception e) {
          Analytics.trackEvent(e.getMessage());
       }
