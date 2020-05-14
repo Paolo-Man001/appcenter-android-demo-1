@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.activity_main);
 
-      AppCenter.start(getApplication(), "b848ee0d-5c05-4564-a8d2-28e7ce469f76",
+      AppCenter.start(getApplication(), "e6806be7-59de-4428-9250-80b0a0b0d9e2",
               Analytics.class, Crashes.class);
 
       mInterestRate = findViewById(R.id.interestEditText);
